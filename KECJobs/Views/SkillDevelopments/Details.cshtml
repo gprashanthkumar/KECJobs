@@ -1,0 +1,82 @@
+﻿@model KECJobs.Models.SkillDevelopment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SkillDevelopment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrgName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrgName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainingCources)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainingCources)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Criteria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Criteria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Locations)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Locations)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherInfo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherInfo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_lookup_costs.CostDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_lookup_costs.CostDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Lookup_Duration.DurationDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Lookup_Duration.DurationDesc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SkillDevID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

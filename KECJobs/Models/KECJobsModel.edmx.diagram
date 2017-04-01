@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1f8f261a187f4041a13f5cab6ee0e711" Name="Diagram1">
+        <EntityTypeShape EntityType="KECJobsModel.Lookup_Experiences" Width="2.125" PointX="0.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="KECJobsModel.tbl_lookup_PositionType" Width="2" PointX="0.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KECJobsModel.tbl_Lookup_Qualifications" Width="2.125" PointX="2.625" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KECJobsModel.sysdiagram" Width="1.5" PointX="6.625" PointY="0.5" />
+        <EntityTypeShape EntityType="KECJobsModel.CompanyReferences" Width="2.125" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="KECJobsModel.Registration" Width="2.25" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="KECJobsModel.SkillDevelopment" Width="1.5" PointX="8.125" PointY="3.625" />
+        <AssociationConnector Association="KECJobsModel.FK_tbl_Registration_tbl_lookup_PositionType" />
+        <AssociationConnector Association="KECJobsModel.FK_tbl_Registration_tbl_Lookup_Qualifications" />
+        <EntityTypeShape EntityType="KECJobsModel.JobOpenings" Width="1.5" PointX="3" PointY="1.25" />
+        <AssociationConnector Association="KECJobsModel.FK_tbl_JobOpenings_tbl_Lookup_Experiences" />
+        <EntityTypeShape EntityType="KECJobsModel.Lookup_Costs" Width="1.5" PointX="5" PointY="2.875" />
+        <AssociationConnector Association="KECJobsModel.FK_tbl_SkillDevelopment_tbl_lookup_costs" />
+        <EntityTypeShape EntityType="KECJobsModel.Lookup_Duration" Width="1.875" PointX="8.375" PointY="9.875" />
+        <AssociationConnector Association="KECJobsModel.FK_tbl_SkillDevelopment_tbl_Lookup_Duration" />
+        <EntityTypeShape EntityType="KECJobsModel.tbl_Lookup_MaritalStatus" Width="1.5" PointX="3.875" PointY="10.375" />
+        <AssociationConnector Association="KECJobsModel.FK_tbl_Registration_tbl_Lookup_MaritalStatus" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

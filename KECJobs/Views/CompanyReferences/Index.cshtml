@@ -1,0 +1,82 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<KECJobs.Models.CompanyReferences>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@*@model IEnumerable<KECJobs.Models.CompanyReferences>*@
+
+@{
+    ViewBag.Title = "Index";
+    var firstRec = true;
+}
+
+<h2>Index</h2>
+
+<br />
+<br />
+<br />
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<p>
+    @using (Html.BeginForm("Index", "CompanyReferences", FormMethod.Get))
+    {
+        @Html.TextBox("Search")
+        <input type="submit" value="Search" />
+    }
+</p>
+<table class="table">
+@foreach (var item in Model)
+{
+    if (firstRec)
+    {
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.Contact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.MailID)
+        </th>
+        <th></th>
+    </tr>
+    }
+    firstRec = false;
+
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            <a href="mailto:@Html.DisplayFor(modelItem => item.MailID)">@Html.DisplayFor(modelItem => item.MailID) </a>
+          
+               
+           
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReferorID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReferorID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReferorID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br/>
+<div id='Paging' style="text-align:center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

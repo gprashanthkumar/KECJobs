@@ -1,0 +1,121 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList< KECJobs.Models.JobOpenings>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@*@model IEnumerable<KECJobs.Models.JobOpenings>*@
+
+@{
+    ViewBag.Title = "Index";
+    var firstRec = true;
+}
+}
+
+    <h2>Index</h2>
+    <br />
+    <br/>
+    <br />
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <p>
+        @using (Html.BeginForm("Index","JobOpenings",FormMethod.Get))
+        {
+        @Html.TextBox("Search")
+        @Html.Hidden("grad", (int)ViewBag.grad)
+            <input type="submit" value="Search" />
+        }
+    </p>
+
+<table class="table">
+@foreach (var item in Model)
+{
+    if (firstRec)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.JobID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.jobPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.Qualification)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.Locations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.ContactDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.ValidFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.ValidTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.Keywords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.tbl_Lookup_Experiences.ExperienceShort_Description)
+            </th>
+            <th></th>
+        </tr>
+    }
+    firstRec = false;
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jobPosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qualification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Locations)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactDetails)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValidFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValidTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Keywords)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_Lookup_Experiences.ExperienceShort_Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.JobOpenID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.JobOpenID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.JobOpenID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    
+  
+
+<div id='Paging' style="text-align:center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

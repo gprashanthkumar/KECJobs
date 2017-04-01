@@ -1,0 +1,143 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<KECJobs.Models.Registration>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@*@model IEnumerable<KECJobs.Models.Registration>*@
+
+@{
+    ViewBag.Title = "Index";
+    var firstRec = true;
+}
+
+<h2>Index</h2>
+
+<br />
+<br />
+<br />
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<p>
+    @using (Html.BeginForm("Index", "Registrations", FormMethod.Get))
+    {
+        @Html.TextBox("Search")
+        <input type="submit" value="Search" />
+    }
+</p>
+<table class="table">
+@foreach (var item in Model)
+{
+    if (firstRec)
+    {
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.FatherName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.MaritalStatusId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.DateofBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.AreaOfIntrest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.ContactNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.ResumeFilePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.tbl_lookup_PositionType.PositionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.tbl_Lookup_Qualifications.QualificationName)
+        </th>
+        <th></th>
+    </tr>
+    }
+    firstRec = false;
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FatherName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaritalStatusId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateofBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AreaOfIntrest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.ResumeFilePath)*@
+            @{ if ( (Convert.ToString(item.ResumeFilePath) != "") && (item.ResumeFilePath != null))
+                {
+
+                    <a href="~/Uploads/@item.ResumeFilePath" target="_blank">Download </a>
+                }
+            }
+            
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_lookup_PositionType.PositionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_Lookup_Qualifications.QualificationName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RegistrationID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RegistrationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RegistrationID })
+        </td>
+    </tr>
+}
+
+</table>
+<div id='Paging' style="text-align:center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

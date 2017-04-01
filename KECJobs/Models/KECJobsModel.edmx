@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KECJobsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_CompanyReferences">
+          <Key>
+            <PropertyRef Name="ReferorID" />
+          </Key>
+          <Property Name="ReferorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MailID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_JobOpenings">
+          <Key>
+            <PropertyRef Name="JobOpenID" />
+          </Key>
+          <Property Name="JobOpenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jobExperienceID" Type="int" Nullable="false" />
+          <Property Name="JobID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Company" Type="varchar" MaxLength="500" />
+          <Property Name="jobPosition" Type="varchar" MaxLength="500" />
+          <Property Name="Qualification" Type="varchar" MaxLength="500" />
+          <Property Name="Locations" Type="varchar" MaxLength="500" />
+          <Property Name="ContactDetails" Type="varchar" MaxLength="500" />
+          <Property Name="ValidFrom" Type="datetime" />
+          <Property Name="ValidTo" Type="date" />
+          <Property Name="Keywords" Type="varchar" MaxLength="5000" />
+        </EntityType>
+        <EntityType Name="tbl_lookup_costs">
+          <Key>
+            <PropertyRef Name="Costid" />
+          </Key>
+          <Property Name="Costid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CostDesc" Type="varchar" MaxLength="500" />
+          <Property Name="active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Lookup_Duration">
+          <Key>
+            <PropertyRef Name="DurationId" />
+          </Key>
+          <Property Name="DurationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DurationDesc" Type="varchar" MaxLength="500" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Lookup_Experiences">
+          <Key>
+            <PropertyRef Name="ExperienceID" />
+          </Key>
+          <Property Name="ExperienceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExperienceShort_Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Exprerience_Logn_Description" Type="varchar" MaxLength="500" />
+          <Property Name="GraduateGroup" Type="bit" Nullable="false" />
+          <Property Name="ExperienceGroup" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Lookup_MaritalStatus">
+          <Key>
+            <PropertyRef Name="maritalstatusid" />
+          </Key>
+          <Property Name="maritalstatusid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="maritalstatus" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_lookup_PositionType">
+          <Key>
+            <PropertyRef Name="PositiontypeId" />
+          </Key>
+          <Property Name="PositiontypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionName" Type="varchar" MaxLength="500" />
+          <Property Name="PositionDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Lookup_Qualifications">
+          <Key>
+            <PropertyRef Name="QualificationId" />
+          </Key>
+          <Property Name="QualificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QualificationName" Type="varchar" MaxLength="100" />
+          <Property Name="QualificationDescription" Type="varchar" MaxLength="1000" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Registration">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="RegistrationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="varchar" MaxLength="500" />
+          <Property Name="FatherName" Type="varchar" MaxLength="1000" />
+          <Property Name="MaritalStatusId" Type="int" />
+          <Property Name="DateofBirth" Type="datetime" />
+          <Property Name="Gender" Type="varchar" MaxLength="4" />
+          <Property Name="QualificationID" Type="int" Nullable="false" />
+          <Property Name="PositiontypeID" Type="int" Nullable="false" />
+          <Property Name="AreaOfIntrest" Type="varchar" MaxLength="1000" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="1000" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar" MaxLength="1000" />
+          <Property Name="ResumeFilePath" Type="varchar" MaxLength="5000" />
+        </EntityType>
+        <EntityType Name="tbl_SkillDevelopment">
+          <Key>
+            <PropertyRef Name="SkillDevID" />
+          </Key>
+          <Property Name="SkillDevID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrgName" Type="varchar" MaxLength="500" />
+          <Property Name="TrainingCources" Type="varchar" MaxLength="1000" />
+          <Property Name="DurationId" Type="int" />
+          <Property Name="CostId" Type="int" />
+          <Property Name="Criteria" Type="varchar" MaxLength="500" />
+          <Property Name="Locations" Type="varchar" MaxLength="500" />
+          <Property Name="OtherInfo" Type="varchar" MaxLength="500" />
+          <Property Name="ContactDetails" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_tbl_JobOpenings_tbl_Lookup_Experiences">
+          <End Role="tbl_Lookup_Experiences" Type="Self.tbl_Lookup_Experiences" Multiplicity="1" />
+          <End Role="tbl_JobOpenings" Type="Self.tbl_JobOpenings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Lookup_Experiences">
+              <PropertyRef Name="ExperienceID" />
+            </Principal>
+            <Dependent Role="tbl_JobOpenings">
+              <PropertyRef Name="jobExperienceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Registration_tbl_Lookup_MaritalStatus">
+          <End Role="tbl_Lookup_MaritalStatus" Type="Self.tbl_Lookup_MaritalStatus" Multiplicity="0..1" />
+          <End Role="tbl_Registration" Type="Self.tbl_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Lookup_MaritalStatus">
+              <PropertyRef Name="maritalstatusid" />
+            </Principal>
+            <Dependent Role="tbl_Registration">
+              <PropertyRef Name="MaritalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Registration_tbl_lookup_PositionType">
+          <End Role="tbl_lookup_PositionType" Type="Self.tbl_lookup_PositionType" Multiplicity="1" />
+          <End Role="tbl_Registration" Type="Self.tbl_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_lookup_PositionType">
+              <PropertyRef Name="PositiontypeId" />
+            </Principal>
+            <Dependent Role="tbl_Registration">
+              <PropertyRef Name="PositiontypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Registration_tbl_Lookup_Qualifications">
+          <End Role="tbl_Lookup_Qualifications" Type="Self.tbl_Lookup_Qualifications" Multiplicity="1" />
+          <End Role="tbl_Registration" Type="Self.tbl_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Lookup_Qualifications">
+              <PropertyRef Name="QualificationId" />
+            </Principal>
+            <Dependent Role="tbl_Registration">
+              <PropertyRef Name="QualificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_SkillDevelopment_tbl_lookup_costs">
+          <End Role="tbl_lookup_costs" Type="Self.tbl_lookup_costs" Multiplicity="0..1" />
+          <End Role="tbl_SkillDevelopment" Type="Self.tbl_SkillDevelopment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_lookup_costs">
+              <PropertyRef Name="Costid" />
+            </Principal>
+            <Dependent Role="tbl_SkillDevelopment">
+              <PropertyRef Name="CostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_SkillDevelopment_tbl_Lookup_Duration">
+          <End Role="tbl_Lookup_Duration" Type="Self.tbl_Lookup_Duration" Multiplicity="0..1" />
+          <End Role="tbl_SkillDevelopment" Type="Self.tbl_SkillDevelopment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Lookup_Duration">
+              <PropertyRef Name="DurationId" />
+            </Principal>
+            <Dependent Role="tbl_SkillDevelopment">
+              <PropertyRef Name="DurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KECJobsModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_CompanyReferences" EntityType="Self.tbl_CompanyReferences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_JobOpenings" EntityType="Self.tbl_JobOpenings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_lookup_costs" EntityType="Self.tbl_lookup_costs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Lookup_Duration" EntityType="Self.tbl_Lookup_Duration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Lookup_Experiences" EntityType="Self.tbl_Lookup_Experiences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Lookup_MaritalStatus" EntityType="Self.tbl_Lookup_MaritalStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_lookup_PositionType" EntityType="Self.tbl_lookup_PositionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Lookup_Qualifications" EntityType="Self.tbl_Lookup_Qualifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Registration" EntityType="Self.tbl_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SkillDevelopment" EntityType="Self.tbl_SkillDevelopment" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_JobOpenings_tbl_Lookup_Experiences" Association="Self.FK_tbl_JobOpenings_tbl_Lookup_Experiences">
+            <End Role="tbl_Lookup_Experiences" EntitySet="tbl_Lookup_Experiences" />
+            <End Role="tbl_JobOpenings" EntitySet="tbl_JobOpenings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Registration_tbl_Lookup_MaritalStatus" Association="Self.FK_tbl_Registration_tbl_Lookup_MaritalStatus">
+            <End Role="tbl_Lookup_MaritalStatus" EntitySet="tbl_Lookup_MaritalStatus" />
+            <End Role="tbl_Registration" EntitySet="tbl_Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Registration_tbl_lookup_PositionType" Association="Self.FK_tbl_Registration_tbl_lookup_PositionType">
+            <End Role="tbl_lookup_PositionType" EntitySet="tbl_lookup_PositionType" />
+            <End Role="tbl_Registration" EntitySet="tbl_Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Registration_tbl_Lookup_Qualifications" Association="Self.FK_tbl_Registration_tbl_Lookup_Qualifications">
+            <End Role="tbl_Lookup_Qualifications" EntitySet="tbl_Lookup_Qualifications" />
+            <End Role="tbl_Registration" EntitySet="tbl_Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_SkillDevelopment_tbl_lookup_costs" Association="Self.FK_tbl_SkillDevelopment_tbl_lookup_costs">
+            <End Role="tbl_lookup_costs" EntitySet="tbl_lookup_costs" />
+            <End Role="tbl_SkillDevelopment" EntitySet="tbl_SkillDevelopment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_SkillDevelopment_tbl_Lookup_Duration" Association="Self.FK_tbl_SkillDevelopment_tbl_Lookup_Duration">
+            <End Role="tbl_Lookup_Duration" EntitySet="tbl_Lookup_Duration" />
+            <End Role="tbl_SkillDevelopment" EntitySet="tbl_SkillDevelopment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KECJobsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Lookup_Experiences">
+          <Key>
+            <PropertyRef Name="ExperienceID" />
+          </Key>
+          <Property Name="ExperienceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExperienceShort_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Exprerience_Logn_Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_JobOpenings" Relationship="KECJobsModel.FK_tbl_JobOpenings_tbl_Lookup_Experiences" FromRole="Lookup_Experiences" ToRole="tbl_JobOpenings" />
+          <Property Name="GraduateGroup" Type="Boolean" Nullable="false" />
+          <Property Name="ExperienceGroup" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_lookup_PositionType">
+          <Key>
+            <PropertyRef Name="PositiontypeId" />
+          </Key>
+          <Property Name="PositiontypeId" Type="Int32" Nullable="false" />
+          <Property Name="PositionName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PositionDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tbl_Registration" Relationship="KECJobsModel.FK_tbl_Registration_tbl_lookup_PositionType" FromRole="tbl_lookup_PositionType" ToRole="tbl_Registration" />
+        </EntityType>
+        <EntityType Name="tbl_Lookup_Qualifications">
+          <Key>
+            <PropertyRef Name="QualificationId" />
+          </Key>
+          <Property Name="QualificationId" Type="Int32" Nullable="false" />
+          <Property Name="QualificationName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QualificationDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tbl_Registration" Relationship="KECJobsModel.FK_tbl_Registration_tbl_Lookup_Qualifications" FromRole="tbl_Lookup_Qualifications" ToRole="tbl_Registration" />
+        </EntityType>
+        <EntityContainer Name="KECJobsDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Lookup_Experiences" EntityType="KECJobsModel.Lookup_Experiences" />
+          <EntitySet Name="tbl_lookup_PositionType" EntityType="Self.tbl_lookup_PositionType" />
+          <EntitySet Name="tbl_Lookup_Qualifications" EntityType="Self.tbl_Lookup_Qualifications" />
+          <EntitySet Name="sysdiagrams" EntityType="KECJobsModel.sysdiagram" />
+          <EntitySet Name="CompanyReferences" EntityType="KECJobsModel.CompanyReferences" />
+          <EntitySet Name="Registrations" EntityType="KECJobsModel.Registration" />
+          <EntitySet Name="SkillDevelopments" EntityType="KECJobsModel.SkillDevelopment" />
+          <AssociationSet Name="FK_tbl_Registration_tbl_lookup_PositionType" Association="KECJobsModel.FK_tbl_Registration_tbl_lookup_PositionType">
+            <End Role="tbl_lookup_PositionType" EntitySet="tbl_lookup_PositionType" />
+            <End Role="tbl_Registration" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Registration_tbl_Lookup_Qualifications" Association="KECJobsModel.FK_tbl_Registration_tbl_Lookup_Qualifications">
+            <End Role="tbl_Lookup_Qualifications" EntitySet="tbl_Lookup_Qualifications" />
+            <End Role="tbl_Registration" EntitySet="Registrations" />
+          </AssociationSet>
+          <EntitySet Name="JobOpenings" EntityType="KECJobsModel.JobOpenings" />
+          <AssociationSet Name="FK_tbl_JobOpenings_tbl_Lookup_Experiences" Association="KECJobsModel.FK_tbl_JobOpenings_tbl_Lookup_Experiences">
+            <End Role="Lookup_Experiences" EntitySet="Lookup_Experiences" />
+            <End Role="tbl_JobOpenings" EntitySet="JobOpenings" />
+          </AssociationSet>
+          <EntitySet Name="Lookup_Costs1" EntityType="KECJobsModel.Lookup_Costs" />
+          <AssociationSet Name="FK_tbl_SkillDevelopment_tbl_lookup_costs" Association="KECJobsModel.FK_tbl_SkillDevelopment_tbl_lookup_costs">
+            <End Role="tbl_lookup_costs" EntitySet="Lookup_Costs1" />
+            <End Role="SkillDevelopment" EntitySet="SkillDevelopments" />
+          </AssociationSet>
+          <EntitySet Name="Lookup_Duration" EntityType="KECJobsModel.Lookup_Duration" />
+          <AssociationSet Name="FK_tbl_SkillDevelopment_tbl_Lookup_Duration" Association="KECJobsModel.FK_tbl_SkillDevelopment_tbl_Lookup_Duration">
+            <End Role="tbl_Lookup_Duration" EntitySet="Lookup_Duration" />
+            <End Role="SkillDevelopment" EntitySet="SkillDevelopments" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Lookup_MaritalStatus" EntityType="KECJobsModel.tbl_Lookup_MaritalStatus" />
+          <AssociationSet Name="FK_tbl_Registration_tbl_Lookup_MaritalStatus" Association="KECJobsModel.FK_tbl_Registration_tbl_Lookup_MaritalStatus">
+            <End Role="tbl_Lookup_MaritalStatus" EntitySet="tbl_Lookup_MaritalStatus" />
+            <End Role="Registration" EntitySet="Registrations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="CompanyReferences">
+          <Key>
+            <PropertyRef Name="ReferorID" />
+          </Key>
+          <Property Name="ReferorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="RegistrationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FatherName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="MaritalStatusId" Type="Int32" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="QualificationID" Type="Int32" Nullable="false" />
+          <Property Name="PositiontypeID" Type="Int32" Nullable="false" />
+          <Property Name="AreaOfIntrest" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ResumeFilePath" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_lookup_PositionType" Relationship="KECJobsModel.FK_tbl_Registration_tbl_lookup_PositionType" FromRole="tbl_Registration" ToRole="tbl_lookup_PositionType" />
+          <NavigationProperty Name="tbl_Lookup_Qualifications" Relationship="KECJobsModel.FK_tbl_Registration_tbl_Lookup_Qualifications" FromRole="tbl_Registration" ToRole="tbl_Lookup_Qualifications" />
+          <NavigationProperty Name="tbl_Lookup_MaritalStatus" Relationship="KECJobsModel.FK_tbl_Registration_tbl_Lookup_MaritalStatus" FromRole="Registration" ToRole="tbl_Lookup_MaritalStatus" />
+        </EntityType>
+        <EntityType Name="SkillDevelopment">
+          <Key>
+            <PropertyRef Name="SkillDevID" />
+          </Key>
+          <Property Name="SkillDevID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrgName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TrainingCources" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="DurationId" Type="Int32" />
+          <Property Name="CostId" Type="Int32" />
+          <Property Name="Criteria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Locations" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OtherInfo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ContactDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_lookup_costs" Relationship="KECJobsModel.FK_tbl_SkillDevelopment_tbl_lookup_costs" FromRole="SkillDevelopment" ToRole="tbl_lookup_costs" />
+          <NavigationProperty Name="tbl_Lookup_Duration" Relationship="KECJobsModel.FK_tbl_SkillDevelopment_tbl_Lookup_Duration" FromRole="SkillDevelopment" ToRole="tbl_Lookup_Duration" />
+        </EntityType>
+        <Association Name="FK_tbl_Registration_tbl_lookup_PositionType">
+          <End Type="KECJobsModel.tbl_lookup_PositionType" Role="tbl_lookup_PositionType" Multiplicity="1" />
+          <End Type="KECJobsModel.Registration" Role="tbl_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_lookup_PositionType">
+              <PropertyRef Name="PositiontypeId" />
+            </Principal>
+            <Dependent Role="tbl_Registration">
+              <PropertyRef Name="PositiontypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Registration_tbl_Lookup_Qualifications">
+          <End Type="KECJobsModel.tbl_Lookup_Qualifications" Role="tbl_Lookup_Qualifications" Multiplicity="1" />
+          <End Type="KECJobsModel.Registration" Role="tbl_Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Lookup_Qualifications">
+              <PropertyRef Name="QualificationId" />
+            </Principal>
+            <Dependent Role="tbl_Registration">
+              <PropertyRef Name="QualificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JobOpenings">
+          <Key>
+            <PropertyRef Name="JobOpenID" />
+          </Key>
+          <Property Name="JobOpenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jobExperienceID" Type="Int32" Nullable="false" />
+          <Property Name="JobID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Company" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="jobPosition" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Qualification" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Locations" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ContactDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ValidFrom" Type="DateTime" Precision="3" />
+          <Property Name="ValidTo" Type="DateTime" Precision="0" />
+          <Property Name="Keywords" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Lookup_Experiences" Relationship="KECJobsModel.FK_tbl_JobOpenings_tbl_Lookup_Experiences" FromRole="tbl_JobOpenings" ToRole="Lookup_Experiences" />
+        </EntityType>
+        <Association Name="FK_tbl_JobOpenings_tbl_Lookup_Experiences">
+          <End Type="KECJobsModel.Lookup_Experiences" Role="Lookup_Experiences" Multiplicity="1" />
+          <End Type="KECJobsModel.JobOpenings" Role="tbl_JobOpenings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup_Experiences">
+              <PropertyRef Name="ExperienceID" />
+            </Principal>
+            <Dependent Role="tbl_JobOpenings">
+              <PropertyRef Name="jobExperienceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Lookup_Costs">
+          <Key>
+            <PropertyRef Name="Costid" />
+          </Key>
+          <Property Name="Costid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CostDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" />
+          <NavigationProperty Name="tbl_SkillDevelopment" Relationship="KECJobsModel.FK_tbl_SkillDevelopment_tbl_lookup_costs" FromRole="tbl_lookup_costs" ToRole="SkillDevelopment" />
+        </EntityType>
+        <Association Name="FK_tbl_SkillDevelopment_tbl_lookup_costs">
+          <End Type="KECJobsModel.Lookup_Costs" Role="tbl_lookup_costs" Multiplicity="0..1" />
+          <End Type="KECJobsModel.SkillDevelopment" Role="SkillDevelopment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_lookup_costs">
+              <PropertyRef Name="Costid" />
+            </Principal>
+            <Dependent Role="SkillDevelopment">
+              <PropertyRef Name="CostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Lookup_Duration">
+          <Key>
+            <PropertyRef Name="DurationId" />
+          </Key>
+          <Property Name="DurationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DurationDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tbl_SkillDevelopment" Relationship="KECJobsModel.FK_tbl_SkillDevelopment_tbl_Lookup_Duration" FromRole="tbl_Lookup_Duration" ToRole="SkillDevelopment" />
+        </EntityType>
+        <Association Name="FK_tbl_SkillDevelopment_tbl_Lookup_Duration">
+          <End Type="KECJobsModel.Lookup_Duration" Role="tbl_Lookup_Duration" Multiplicity="0..1" />
+          <End Type="KECJobsModel.SkillDevelopment" Role="SkillDevelopment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Lookup_Duration">
+              <PropertyRef Name="DurationId" />
+            </Principal>
+            <Dependent Role="SkillDevelopment">
+              <PropertyRef Name="DurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_Lookup_MaritalStatus">
+          <Key>
+            <PropertyRef Name="maritalstatusid" />
+          </Key>
+          <Property Name="maritalstatusid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maritalstatus" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Registration" Relationship="KECJobsModel.FK_tbl_Registration_tbl_Lookup_MaritalStatus" FromRole="tbl_Lookup_MaritalStatus" ToRole="Registration" />
+        </EntityType>
+        <Association Name="FK_tbl_Registration_tbl_Lookup_MaritalStatus">
+          <End Type="KECJobsModel.tbl_Lookup_MaritalStatus" Role="tbl_Lookup_MaritalStatus" Multiplicity="0..1" />
+          <End Type="KECJobsModel.Registration" Role="Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Lookup_MaritalStatus">
+              <PropertyRef Name="maritalstatusid" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="MaritalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KECJobsModelStoreContainer" CdmEntityContainer="KECJobsDBContext">
+          <EntitySetMapping Name="Lookup_Experiences">
+            <EntityTypeMapping TypeName="KECJobsModel.Lookup_Experiences">
+              <MappingFragment StoreEntitySet="tbl_Lookup_Experiences">
+                <ScalarProperty Name="ExperienceGroup" ColumnName="ExperienceGroup" />
+                <ScalarProperty Name="GraduateGroup" ColumnName="GraduateGroup" />
+                <ScalarProperty Name="Exprerience_Logn_Description" ColumnName="Exprerience_Logn_Description" />
+                <ScalarProperty Name="ExperienceShort_Description" ColumnName="ExperienceShort_Description" />
+                <ScalarProperty Name="ExperienceID" ColumnName="ExperienceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_lookup_PositionType">
+            <EntityTypeMapping TypeName="KECJobsModel.tbl_lookup_PositionType">
+              <MappingFragment StoreEntitySet="tbl_lookup_PositionType">
+                <ScalarProperty Name="PositiontypeId" ColumnName="PositiontypeId" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="PositionDescription" ColumnName="PositionDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Lookup_Qualifications">
+            <EntityTypeMapping TypeName="KECJobsModel.tbl_Lookup_Qualifications">
+              <MappingFragment StoreEntitySet="tbl_Lookup_Qualifications">
+                <ScalarProperty Name="QualificationId" ColumnName="QualificationId" />
+                <ScalarProperty Name="QualificationName" ColumnName="QualificationName" />
+                <ScalarProperty Name="QualificationDescription" ColumnName="QualificationDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KECJobsModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyReferences">
+            <EntityTypeMapping TypeName="KECJobsModel.CompanyReferences">
+              <MappingFragment StoreEntitySet="tbl_CompanyReferences">
+                <ScalarProperty Name="MailID" ColumnName="MailID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="ReferorID" ColumnName="ReferorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="KECJobsModel.Registration">
+              <MappingFragment StoreEntitySet="tbl_Registration">
+                <ScalarProperty Name="ResumeFilePath" ColumnName="ResumeFilePath" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="AreaOfIntrest" ColumnName="AreaOfIntrest" />
+                <ScalarProperty Name="PositiontypeID" ColumnName="PositiontypeID" />
+                <ScalarProperty Name="QualificationID" ColumnName="QualificationID" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="MaritalStatusId" ColumnName="MaritalStatusId" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="RegistrationID" ColumnName="RegistrationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SkillDevelopments">
+            <EntityTypeMapping TypeName="KECJobsModel.SkillDevelopment">
+              <MappingFragment StoreEntitySet="tbl_SkillDevelopment">
+                <ScalarProperty Name="ContactDetails" ColumnName="ContactDetails" />
+                <ScalarProperty Name="OtherInfo" ColumnName="OtherInfo" />
+                <ScalarProperty Name="Locations" ColumnName="Locations" />
+                <ScalarProperty Name="Criteria" ColumnName="Criteria" />
+                <ScalarProperty Name="CostId" ColumnName="CostId" />
+                <ScalarProperty Name="DurationId" ColumnName="DurationId" />
+                <ScalarProperty Name="TrainingCources" ColumnName="TrainingCources" />
+                <ScalarProperty Name="OrgName" ColumnName="OrgName" />
+                <ScalarProperty Name="SkillDevID" ColumnName="SkillDevID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobOpenings">
+            <EntityTypeMapping TypeName="KECJobsModel.JobOpenings">
+              <MappingFragment StoreEntitySet="tbl_JobOpenings">
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="ContactDetails" ColumnName="ContactDetails" />
+                <ScalarProperty Name="Locations" ColumnName="Locations" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="jobPosition" ColumnName="jobPosition" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="jobExperienceID" ColumnName="jobExperienceID" />
+                <ScalarProperty Name="JobOpenID" ColumnName="JobOpenID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookup_Costs1">
+            <EntityTypeMapping TypeName="KECJobsModel.Lookup_Costs">
+              <MappingFragment StoreEntitySet="tbl_lookup_costs">
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="CostDesc" ColumnName="CostDesc" />
+                <ScalarProperty Name="Costid" ColumnName="Costid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookup_Duration">
+            <EntityTypeMapping TypeName="KECJobsModel.Lookup_Duration">
+              <MappingFragment StoreEntitySet="tbl_Lookup_Duration">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DurationDesc" ColumnName="DurationDesc" />
+                <ScalarProperty Name="DurationId" ColumnName="DurationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Lookup_MaritalStatus">
+            <EntityTypeMapping TypeName="KECJobsModel.tbl_Lookup_MaritalStatus">
+              <MappingFragment StoreEntitySet="tbl_Lookup_MaritalStatus">
+                <ScalarProperty Name="maritalstatus" ColumnName="maritalstatus" />
+                <ScalarProperty Name="maritalstatusid" ColumnName="maritalstatusid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

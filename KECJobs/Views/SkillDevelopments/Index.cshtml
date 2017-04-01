@@ -1,0 +1,115 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<KECJobs.Models.SkillDevelopment>
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@*@model IEnumerable<KECJobs.Models.SkillDevelopment>*@
+
+@{
+    ViewBag.Title = "Index";
+    var firstRec = true;
+}
+
+<h2>Index</h2>
+
+<br />
+<br />
+<br />
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<p>
+    @using (Html.BeginForm("Index","SkillDevelopments", FormMethod.Get))
+    {
+        @Html.TextBox("Search")
+       <input type="submit" value="Search" />
+    }
+</p>
+
+<table class="table">
+@foreach (var item in Model)
+{
+
+    if (firstRec) {
+    <tr>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.OrgName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.TrainingCources)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.Criteria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.Locations)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.OtherInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.ContactDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.tbl_lookup_costs.CostDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(modelItem => item.tbl_Lookup_Duration.DurationDesc)
+        </th>
+        <th></th>
+    </tr>
+
+
+    }
+    firstRec = false;
+
+
+
+
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrgName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrainingCources)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Criteria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Locations)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OtherInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_lookup_costs.CostDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_Lookup_Duration.DurationDesc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SkillDevID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SkillDevID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SkillDevID })
+        </td>
+    </tr>
+   
+}
+
+</table>
+<br />
+<div id='Paging' style="text-align:center">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
