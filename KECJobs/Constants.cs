@@ -46,7 +46,6 @@ namespace KECJobs
 
             //public const string FullName = "FullName";
             public const string Name = "Name";
-
             public const string EmailId = "EmailId";
 
             public const string RoleId = "RoleId";
@@ -55,6 +54,7 @@ namespace KECJobs
             public const string isJobsEditor = "isJobsEditor";
             public const string isRegistrationEditor = "isRegistrationEditor";
             public const string isReferenceEditor = "isReferenceEditor";
+            public const string isSkillDevelopmentEditor = "isSkillDevelopmentEditor";
             public const string isGuest = "isGuest";
 
 

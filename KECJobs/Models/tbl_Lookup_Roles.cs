@@ -28,6 +28,7 @@ namespace KECJobs.Models
         public bool isReferenceEditor { get; set; }
         public bool IsGuest { get; set; }
         public bool Active { get; set; }
+        public bool isSkillDevelopmentEditor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_Users> tbl_Users { get; set; }

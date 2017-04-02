@@ -127,12 +127,21 @@
             @Html.DisplayFor(modelItem => item.tbl_Lookup_Qualifications.QualificationName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RegistrationID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RegistrationID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RegistrationID })
-        </td>
+            @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isJobsEditor == true)))
+            {                   <span>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RegistrationID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RegistrationID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RegistrationID })
+            </span>
+            }
+            else if (KECAuthenticate.isAuthenticated == true) {
+                <span>
+                    @Html.ActionLink("Details", "Details", new { id = item.RegistrationID })
+                </span>
+            }
+</td>
     </tr>
-}
+                }
 
 </table>
 <div id='Paging' style="text-align:center">

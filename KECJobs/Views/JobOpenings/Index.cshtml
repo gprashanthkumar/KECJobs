@@ -102,12 +102,24 @@
                     @Html.DisplayFor(modelItem => item.tbl_Lookup_Experiences.ExperienceShort_Description)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.JobOpenID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.JobOpenID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.JobOpenID })
+@if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isJobsEditor == true)))
+{                   <span>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.JobOpenID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.JobOpenID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.JobOpenID })
+                    </span>
+}
+else if ((KECAuthenticate.isAuthenticated == true))
+{
+    <span>
+       
+        @Html.ActionLink("Details", "Details", new { id = item.JobOpenID })
+       
+    </span>
+}
                 </td>
             </tr>
-        }
+}
 
     </table>
     

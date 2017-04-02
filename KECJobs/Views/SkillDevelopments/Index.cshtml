@@ -97,10 +97,20 @@
             @Html.DisplayFor(modelItem => item.tbl_Lookup_Duration.DurationDesc)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SkillDevID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SkillDevID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SkillDevID })
-        </td>
+                        @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isSkillDevelopmentEditor == true)))
+                        {
+                            <span>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.SkillDevID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.SkillDevID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.SkillDevID })
+                            </span>
+                        }
+                        else if (KECAuthenticate.isAuthenticated == true)
+                        {
+
+                            @Html.ActionLink("Details", "Details", new { id = item.SkillDevID })
+                        }
+</td>
     </tr>
    
 }

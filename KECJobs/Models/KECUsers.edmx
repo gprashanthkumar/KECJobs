@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KECUsers.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KECUsers.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_Lookup_Roles">
           <Key>
             <PropertyRef Name="RoleID" />
@@ -15,6 +15,7 @@
           <Property Name="isJobsEditor" Type="bit" Nullable="false" />
           <Property Name="isRegistrationEditor" Type="bit" Nullable="false" />
           <Property Name="isReferenceEditor" Type="bit" Nullable="false" />
+          <Property Name="isSkillDevelopmentEditor" Type="bit" Nullable="false" />
           <Property Name="IsGuest" Type="bit" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
@@ -50,8 +51,7 @@
             <End Role="tbl_Users" EntitySet="tbl_Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KECUsers" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -68,6 +68,7 @@
           <Property Name="IsGuest" Type="Boolean" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbl_Users" Relationship="Self.FK_tbl_Users_tbl_Lookup_Roles" FromRole="tbl_Lookup_Roles" ToRole="tbl_Users" />
+          <Property Name="isSkillDevelopmentEditor" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_Users">
           <Key>
@@ -111,6 +112,7 @@
           <EntitySetMapping Name="tbl_Lookup_Roles">
             <EntityTypeMapping TypeName="KECUsers.tbl_Lookup_Roles">
               <MappingFragment StoreEntitySet="tbl_Lookup_Roles">
+                <ScalarProperty Name="isSkillDevelopmentEditor" ColumnName="isSkillDevelopmentEditor" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />

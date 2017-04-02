@@ -187,6 +187,7 @@ namespace KECJobs.Controllers
                             KECAuthenticate.isJobsEditor = _user.tbl_Lookup_Roles.isJobsEditor;
                             KECAuthenticate.isReferenceEditor = _user.tbl_Lookup_Roles.isReferenceEditor;
                             KECAuthenticate.isRegistrationEditor = _user.tbl_Lookup_Roles.isRegistrationEditor;
+                            KECAuthenticate.isSkillDevelopmentEditor = _user.tbl_Lookup_Roles.isSkillDevelopmentEditor;
                             KECAuthenticate.isGuest = _user.tbl_Lookup_Roles.IsGuest;
                         }
                        

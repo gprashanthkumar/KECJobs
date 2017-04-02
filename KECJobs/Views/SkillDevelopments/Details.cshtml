@@ -77,6 +77,13 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SkillDevID }) |
+@if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isSkillDevelopmentEditor == true)))
+{
+    <span>
+        Html.ActionLink("Edit", "Edit", new { id = Model.SkillDevID }) |
+    </span>
+}       <span>
     @Html.ActionLink("Back to List", "Index")
+</span>
+
 </p>

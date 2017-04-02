@@ -1,5 +1,6 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
+@using KECJobs;
 @model PagedList.IPagedList<KECJobs.Models.CompanyReferences>
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -64,9 +65,19 @@
            
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReferorID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ReferorID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReferorID })
+            @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isReferenceEditor == true)))
+            {
+                <span>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ReferorID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ReferorID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ReferorID })
+                </span>
+            } 
+            else if (KECAuthenticate.isAuthenticated == true){
+
+            @Html.ActionLink("Details", "Details", new { id = item.ReferorID })
+            }
+           
         </td>
     </tr>
 }

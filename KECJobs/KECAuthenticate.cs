@@ -161,6 +161,21 @@ namespace KECJobs
                 SetCookie(SessionVariables.isRegistrationEditor, value);
             }
         }
+        public static bool isSkillDevelopmentEditor
+        {
+            get
+            {
+                var res = string.Empty;
+                res = GetCookie(SessionVariables.isSkillDevelopmentEditor);
+
+                return Convert.ToBoolean(res);
+
+            }
+            set
+            {
+                SetCookie(SessionVariables.isSkillDevelopmentEditor, value);
+            }
+        }
         public static bool isGuest
         {
             get
