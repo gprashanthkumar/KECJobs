@@ -11,7 +11,8 @@ namespace KECJobs.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class JobOpenings
     {
         public int JobOpenID { get; set; }
@@ -22,9 +23,12 @@ namespace KECJobs.Models
         public string Qualification { get; set; }
         public string Locations { get; set; }
         public string ContactDetails { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public Nullable<System.DateTime> ValidFrom { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public Nullable<System.DateTime> ValidTo { get; set; }
         public string Keywords { get; set; }
+        public string JobFile { get; set; }
     
         public virtual Lookup_Experiences tbl_Lookup_Experiences { get; set; }
     }

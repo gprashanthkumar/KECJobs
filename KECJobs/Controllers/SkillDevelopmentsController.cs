@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using KECJobs.Models;
 using PagedList;
+using System.Configuration;
 
 namespace KECJobs.Controllers
 {
@@ -21,6 +22,10 @@ namespace KECJobs.Controllers
             Search = Convert.ToString(Search).Trim();
             var skillDevelopments = db.SkillDevelopments.Include(s => s.tbl_lookup_costs).Include(s => s.tbl_Lookup_Duration);
             int PageSize = 3;
+            if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["GridRows"]))
+            {
+                int.TryParse(ConfigurationManager.AppSettings["GridRows"], out PageSize);
+            }
             int PageNumber = (Page ?? 1);
 
             if (Search.Equals(string.Empty))
@@ -157,6 +162,10 @@ namespace KECJobs.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }

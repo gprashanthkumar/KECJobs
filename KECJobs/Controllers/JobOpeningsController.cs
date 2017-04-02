@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using KECJobs.Models;
 using PagedList;
+using System.Configuration;
 
 namespace KECJobs.Controllers
 {
@@ -16,11 +17,23 @@ namespace KECJobs.Controllers
         private KECJobsDBContext db = new KECJobsDBContext();
 
         // GET: JobOpenings
-        public ActionResult Index(int? Page , int grad = 0,string Search  = "")
+        public ActionResult Index(int? Page, int grad = 0, string Search = "")
         {
+            var strAppPath = System.Web.HttpRuntime.AppDomainAppVirtualPath.ToString();
+            if (strAppPath == "/")
+            {
+                strAppPath = string.Empty;
+            }
+            strAppPath += ConfigurationManager.AppSettings["OpeningUploads"];
+            ViewBag.UploadPath = strAppPath;
+
             Search = Convert.ToString(Search).Trim();
             var jobOpenings = db.JobOpenings.Include(j => j.tbl_Lookup_Experiences);
             int PageSize = 3;
+            if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["GridRows"]))
+            {
+                int.TryParse(ConfigurationManager.AppSettings["GridRows"], out PageSize);
+            }
             int PageNumber = (Page ?? 1);
             if (grad == 1)
             {
@@ -30,8 +43,9 @@ namespace KECJobs.Controllers
                     Page = 1;
                     return View(jobOpenings.Where(n => n.tbl_Lookup_Experiences.GraduateGroup == true).OrderBy(m => m.JobOpenID).ToPagedList(PageNumber, PageSize));
                 }
-                else {
-                    
+                else
+                {
+
                     //return View(jobOpenings.ToPagedList(PageNumber, PageSize));
                     return View(jobOpenings.Where(n => n.tbl_Lookup_Experiences.GraduateGroup == true
                     && (
@@ -41,21 +55,23 @@ namespace KECJobs.Controllers
                     || (n.Keywords.Contains(Search))
                      || (n.ContactDetails.Contains(Search))
                       || (n.Locations.Contains(Search))
-                      ||(n.Qualification.Contains(Search))
-                    )).OrderBy(m=>m.JobOpenID).ToPagedList(PageNumber, PageSize));
+                      || (n.Qualification.Contains(Search))
+                    )).OrderBy(m => m.JobOpenID).ToPagedList(PageNumber, PageSize));
 
-                    
+
                 }
             }
-            else {
+            else
+            {
                 ViewBag.grad = 0;
                 if (Search.Equals(string.Empty))
                 {
                     Page = 1;
                     return View(jobOpenings.Where(n => n.tbl_Lookup_Experiences.ExperienceGroup == true).OrderBy(m => m.JobOpenID).ToPagedList(PageNumber, PageSize));
                 }
-                else {
-                   
+                else
+                {
+
                     //return View(jobOpenings.ToPagedList(PageNumber, PageSize));
                     return View(jobOpenings.Where(n => n.tbl_Lookup_Experiences.ExperienceGroup == true
                    && (
@@ -65,13 +81,13 @@ namespace KECJobs.Controllers
                    || (n.Keywords.Contains(Search))
                     || (n.ContactDetails.Contains(Search))
                     || (n.Locations.Contains(Search))
-                    ||(n.Qualification.Contains(Search))
-                   )).OrderBy(m=>m.JobOpenID).ToPagedList(PageNumber,PageSize));
+                    || (n.Qualification.Contains(Search))
+                   )).OrderBy(m => m.JobOpenID).ToPagedList(PageNumber, PageSize));
 
-                   
+
                 }
             }
-        
+
         }
 
         // GET: JobOpenings/Details/5
@@ -93,7 +109,7 @@ namespace KECJobs.Controllers
         public ActionResult Create()
         {
             ViewBag.jobExperienceID = new SelectList(db.Lookup_Experiences, "ExperienceID", "ExperienceShort_Description");
-          
+
             return View();
         }
 
@@ -102,13 +118,32 @@ namespace KECJobs.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "JobOpenID,jobExperienceID,JobID,Company,jobPosition,Qualification,Locations,ContactDetails,ValidFrom,ValidTo,Keywords")] JobOpenings jobOpenings)
+        public ActionResult Create([Bind(Include = "JobOpenID,jobExperienceID,JobID,Company,jobPosition,Qualification,Locations,ContactDetails,ValidFrom,ValidTo,Keywords,JobFile")] JobOpenings jobOpenings)
         {
+            var strAppPath = System.Web.HttpRuntime.AppDomainAppVirtualPath.ToString();
+            if (strAppPath == "/")
+            {
+                strAppPath = string.Empty;
+            }
+
+
+
             if (ModelState.IsValid)
             {
                 db.JobOpenings.Add(jobOpenings);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+            }
+
+            foreach (string upload in Request.Files)
+            {
+                //c:\users\narsa\documents\visual studio 2015\Projects\KECJobs\KECJobs\Registrations\Uploads\
+                //byte[] fileData = new byte[Request.Files[upload].InputStream.Length];
+                var x = Server.MapPath(strAppPath + ConfigurationManager.AppSettings["OpeningUploads"]) + "\\" + jobOpenings.JobOpenID.ToString() + "_" + Request.Files[upload].FileName;
+                Request.Files[upload].SaveAs(x);
+                jobOpenings.JobFile = jobOpenings.JobOpenID.ToString() + "_" + Request.Files[upload].FileName;
+                db.SaveChanges();
+
             }
 
             ViewBag.jobExperienceID = new SelectList(db.Lookup_Experiences, "ExperienceID", "ExperienceShort_Description", jobOpenings.jobExperienceID);
@@ -181,6 +216,11 @@ namespace KECJobs.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }

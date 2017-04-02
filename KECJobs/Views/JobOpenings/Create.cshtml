@@ -9,7 +9,8 @@
 
 
 
-@using (Html.BeginForm()) 
+@*@using (Html.BeginForm())*@ 
+@using (Html.BeginForm("Create", "JobOpenings", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -96,6 +97,22 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Keywords, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Keywords, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JobFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.ResumeFilePath, new { htmlAttributes = new { @class = "form-control" } })*@
+                @*@Html.ValidationMessageFor(model => model.ResumeFilePath, "", new { @class = "text-danger" })*@
+
+
+                <label for="file">Upload Job ad file:</label>
+                <input type="file" name="JobAdFile" id="JobAdFile" /><br><br>
+
+                @ViewBag.Message
+
             </div>
         </div>
 

@@ -6,14 +6,20 @@
 @*@model IEnumerable<KECJobs.Models.JobOpenings>*@
 
 @{
-    ViewBag.Title = "Index";
-    var firstRec = true;
-}
-}
+    if (ViewBag.grad == 1) {
+        ViewBag.Title = "Job Openings for graduates list";
+    }
+    else {
+        ViewBag.Title = "Job Openings for experienced list";
+    }
 
-    <h2>Index</h2>
-    <br />
-    <br/>
+    var firstRec = true;
+    var UploadPath = ViewBag.UploadPath + "/";
+}
+}
+<br />
+<br />
+    <h2>Job Openings</h2>  
     <br />
 @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isJobsEditor == true)))
 {
@@ -66,6 +72,9 @@
             <th>
                 Experience
             </th>
+            <th>
+                Job <br/>Ad File
+            </th>
             <th></th>
         </tr>
     }
@@ -103,7 +112,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.tbl_Lookup_Experiences.ExperienceShort_Description)
                 </td>
+
                 <td>
+                    @*@Html.DisplayFor(modelItem => item.ResumeFilePath)*@
+                    @{ if ((Convert.ToString(item.JobFile) != "") && (item.JobFile != null))
+                            {
+
+                            <a href="@UploadPath@item.JobFile" target="_new">Download </a>
+                        }
+                    }
+
+
+                </td>
+                <td nowrap>
 @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isJobsEditor == true)))
 {                   <span>
                         @Html.ActionLink("Edit", "Edit", new { id = item.JobOpenID }) |

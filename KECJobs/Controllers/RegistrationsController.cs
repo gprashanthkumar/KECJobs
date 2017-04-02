@@ -20,9 +20,20 @@ namespace KECJobs.Controllers
         // GET: Registrations
         public ActionResult Index(int? Page, string Search = "")
         {
+            var strAppPath = System.Web.HttpRuntime.AppDomainAppVirtualPath.ToString();
+            if (strAppPath == "/")
+            {
+                strAppPath = string.Empty;
+            }
+            strAppPath += ConfigurationManager.AppSettings["RegistrationUploads"];
+            ViewBag.UploadPath = strAppPath;
             Search = Convert.ToString(Search).Trim();
             var registrations = db.Registrations.Include(r => r.tbl_lookup_PositionType).Include(r => r.tbl_Lookup_Qualifications).Include(r=>r.tbl_Lookup_MaritalStatus);
             int PageSize = 3;
+                if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["GridRows"]))
+                {
+                 int.TryParse(ConfigurationManager.AppSettings["GridRows"],out PageSize);
+                 }
             int PageNumber = (Page ?? 1);
 
             if (Search.Equals(string.Empty))
@@ -95,6 +106,8 @@ namespace KECJobs.Controllers
             if (strAppPath == "/") {
                 strAppPath = string.Empty;
             }
+          
+           
 
             if (ModelState.IsValid)
             {
@@ -197,5 +210,6 @@ namespace KECJobs.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

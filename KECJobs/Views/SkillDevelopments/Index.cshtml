@@ -99,7 +99,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.tbl_Lookup_Duration.DurationDesc)
         </td>
-        <td>
+        <td nowrap>
                         @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isSkillDevelopmentEditor == true)))
                         {
                             <span>

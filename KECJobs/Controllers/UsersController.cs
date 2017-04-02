@@ -17,7 +17,11 @@ namespace KECJobs.Controllers
             return View();
         }
 
-
+        public ActionResult Lockout()
+        {
+            return View();
+        }
+        
 
         #region "Remove"
         // GET: Users/Details/5

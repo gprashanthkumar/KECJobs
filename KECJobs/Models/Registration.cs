@@ -11,7 +11,8 @@ namespace KECJobs.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Registration
     {
         public int RegistrationID { get; set; }
@@ -19,6 +20,7 @@ namespace KECJobs.Models
         public string Name { get; set; }
         public string FatherName { get; set; }
         public Nullable<int> MaritalStatusId { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public Nullable<System.DateTime> DateofBirth { get; set; }
         public string Gender { get; set; }
         public int QualificationID { get; set; }

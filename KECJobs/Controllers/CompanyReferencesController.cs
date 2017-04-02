@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using KECJobs.Models;
 using PagedList;
+using System.Configuration;
 
 namespace KECJobs.Controllers
 {
@@ -22,6 +23,10 @@ namespace KECJobs.Controllers
             var References = db.CompanyReferences.ToList();
             //return View(db.CompanyReferences.ToList());
             int PageSize = 3;
+            if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["GridRows"]))
+            {
+                int.TryParse(ConfigurationManager.AppSettings["GridRows"], out PageSize);
+            }
             int PageNumber = (Page ?? 1);
             if (Search.Equals(string.Empty))
             {
@@ -142,6 +147,10 @@ namespace KECJobs.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }

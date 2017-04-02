@@ -6,8 +6,9 @@
 @*@model IEnumerable<KECJobs.Models.Registration>*@
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Event Registration List";
     var firstRec = true;
+    var UploadPath = ViewBag.UploadPath +"/";
 }
 
 <h2>Index</h2>
@@ -19,7 +20,7 @@
 @if (KECAuthenticate.isAuthenticated == true)
 {
 <p>
-    @Html.ActionLink("Register for Event", "Register")
+    @Html.ActionLink("Register a new member for Event", "Register")
 </p>
 }
 
@@ -96,7 +97,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.tbl_Lookup_MaritalStatus.maritalstatus)
         </td>
-        <td>
+        <td nowrap>
             @Html.DisplayFor(modelItem => item.DateofBirth)
         </td>
         <td>
@@ -124,12 +125,12 @@
 
 @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isRegistrationEditor == true)))
 {
-        <td>
+        <td >
             @*@Html.DisplayFor(modelItem => item.ResumeFilePath)*@
             @{ if ((Convert.ToString(item.ResumeFilePath) != "") && (item.ResumeFilePath != null))
                 {
 
-                    <a href="~/Uploads/@item.ResumeFilePath" target="_blank">Download </a>
+                    <a href="@UploadPath@item.ResumeFilePath" target="_new">Download </a>
                 }
             }
             
@@ -142,7 +143,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.tbl_Lookup_Qualifications.QualificationName)
         </td>
-        <td>
+        <td nowrap>
             @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isRegistrationEditor == true)))
             {                   <span>
                 @Html.ActionLink("Edit", "Edit", new { id = item.RegistrationID }) |

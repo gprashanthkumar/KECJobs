@@ -456,6 +456,8 @@
     <Content Include="Views\Registrations\Success.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Shared\_KECLoginPartial.cshtml" />
+    <Content Include="Views\JobOpenings\Success.cshtml" />
+    <Content Include="Views\Users\Lockout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

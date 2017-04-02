@@ -39,6 +39,7 @@
           <Property Name="ValidFrom" Type="datetime" />
           <Property Name="ValidTo" Type="date" />
           <Property Name="Keywords" Type="varchar" MaxLength="5000" />
+          <Property Name="JobFile" Type="varchar" MaxLength="5000" />
         </EntityType>
         <EntityType Name="tbl_lookup_costs">
           <Key>
@@ -402,6 +403,7 @@
           <Property Name="ValidTo" Type="DateTime" Precision="0" />
           <Property Name="Keywords" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tbl_Lookup_Experiences" Relationship="KECJobsModel.FK_tbl_JobOpenings_tbl_Lookup_Experiences" FromRole="tbl_JobOpenings" ToRole="Lookup_Experiences" />
+          <Property Name="JobFile" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_tbl_JobOpenings_tbl_Lookup_Experiences">
           <End Type="KECJobsModel.Lookup_Experiences" Role="Lookup_Experiences" Multiplicity="1" />
@@ -573,6 +575,7 @@
           <EntitySetMapping Name="JobOpenings">
             <EntityTypeMapping TypeName="KECJobsModel.JobOpenings">
               <MappingFragment StoreEntitySet="tbl_JobOpenings">
+                <ScalarProperty Name="JobFile" ColumnName="JobFile" />
                 <ScalarProperty Name="Keywords" ColumnName="Keywords" />
                 <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
                 <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
