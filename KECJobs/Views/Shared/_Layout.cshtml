@@ -23,7 +23,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li> 
-                    <li>@Html.ActionLink("Event Registrations", "Register", "Registrations")</li>
+                        @if (KECAuthenticate.isAuthenticated == true)
+                        {
+                           <li>@Html.ActionLink("Event Registrations", "index", "Registrations")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Event Registrations", "Register", "Registrations")</li>
+                        }
                    <li>@Html.ActionLink("Reference", "Index", "CompanyReferences")</li>
                     <li>@Html.ActionLink("Job-Openings-Fresheres", "Index", "JobOpenings" , new { grad = 1 },null)</li>
                     <li>@Html.ActionLink("Job-Openings-Experience", "Index", "JobOpenings")</li>

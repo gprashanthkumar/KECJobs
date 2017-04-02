@@ -15,10 +15,12 @@
     <br />
     <br/>
     <br />
-
+@if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isJobsEditor == true)))
+{
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
+}
     <p>
         @using (Html.BeginForm("Index","JobOpenings",FormMethod.Get))
         {
@@ -35,13 +37,13 @@
     {
         <tr>
             <th>
-                @Html.DisplayNameFor(modelItem => item.JobID)
+                Job#
             </th>
             <th>
                 @Html.DisplayNameFor(modelItem => item.Company)
             </th>
             <th>
-                @Html.DisplayNameFor(modelItem => item.jobPosition)
+                Job Position
             </th>
             <th>
                 @Html.DisplayNameFor(modelItem => item.Qualification)
@@ -50,19 +52,19 @@
                 @Html.DisplayNameFor(modelItem => item.Locations)
             </th>
             <th>
-                @Html.DisplayNameFor(modelItem => item.ContactDetails)
+                Contact Details
             </th>
             <th>
-                @Html.DisplayNameFor(modelItem => item.ValidFrom)
+               Acceptance From
             </th>
             <th>
-                @Html.DisplayNameFor(modelItem => item.ValidTo)
+                Acceptance Till
             </th>
             <th>
                 @Html.DisplayNameFor(modelItem => item.Keywords)
             </th>
             <th>
-                @Html.DisplayNameFor(modelItem => item.tbl_Lookup_Experiences.ExperienceShort_Description)
+                Experience
             </th>
             <th></th>
         </tr>

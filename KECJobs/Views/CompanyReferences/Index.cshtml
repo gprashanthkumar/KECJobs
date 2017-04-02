@@ -18,11 +18,12 @@
 <br />
 <br />
 
-
+@if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isReferenceEditor == true)))
+{
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
+}
 <p>
     @using (Html.BeginForm("Index", "CompanyReferences", FormMethod.Get))
     {
@@ -37,13 +38,13 @@
     {
     <tr>
         <th>
-            @Html.DisplayNameFor(modelItem => item.Contact)
+            Contact Name
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.CompanyName)
+            Company Name
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.MailID)
+            Email Address
         </th>
         <th></th>
     </tr>

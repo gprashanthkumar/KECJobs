@@ -16,10 +16,12 @@
 <br />
 <br />
 
-
+@if (KECAuthenticate.isAuthenticated == true)
+{
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Register for Event", "Register")
 </p>
+}
 
 <p>
     @using (Html.BeginForm("Index", "Registrations", FormMethod.Get))
@@ -41,37 +43,40 @@
             @Html.DisplayNameFor(modelItem => item.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.FatherName)
+            Father Name
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.MaritalStatusId)
+            marital status
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.DateofBirth)
+            Date of Birth
         </th>
         <th>
             @Html.DisplayNameFor(modelItem => item.Gender)
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.AreaOfIntrest)
+            Area Of Intrest
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.EmailAddress)
+            Email Address
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.ContactNumber)
+            Contact Number
         </th>
         <th>
             @Html.DisplayNameFor(modelItem => item.Address)
         </th>
+@if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isRegistrationEditor == true)))
+{
         <th>
-            @Html.DisplayNameFor(modelItem => item.ResumeFilePath)
+            ResumeFile
+        </th>
+}
+        <th>
+            Position
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.tbl_lookup_PositionType.PositionName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(modelItem => item.tbl_Lookup_Qualifications.QualificationName)
+            Qualification
         </th>
         <th></th>
     </tr>
@@ -89,7 +94,7 @@
             @Html.DisplayFor(modelItem => item.FatherName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MaritalStatusId)
+            @Html.DisplayFor(modelItem => item.tbl_Lookup_MaritalStatus.maritalstatus)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateofBirth)
@@ -101,7 +106,14 @@
             @Html.DisplayFor(modelItem => item.AreaOfIntrest)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EmailAddress)
+            @{ if ((Convert.ToString(item.EmailAddress) != "") && (item.EmailAddress != null))
+                {
+
+                    <a href="mailto:@Html.DisplayFor(modelItem => item.EmailAddress)">@Html.DisplayFor(modelItem => item.EmailAddress) </a>
+                }
+            }
+           
+         
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ContactNumber)
@@ -109,9 +121,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.Address)
         </td>
+
+@if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isRegistrationEditor == true)))
+{
         <td>
             @*@Html.DisplayFor(modelItem => item.ResumeFilePath)*@
-            @{ if ( (Convert.ToString(item.ResumeFilePath) != "") && (item.ResumeFilePath != null))
+            @{ if ((Convert.ToString(item.ResumeFilePath) != "") && (item.ResumeFilePath != null))
                 {
 
                     <a href="~/Uploads/@item.ResumeFilePath" target="_blank">Download </a>
@@ -120,6 +135,7 @@
             
 
         </td>
+}
         <td>
             @Html.DisplayFor(modelItem => item.tbl_lookup_PositionType.PositionName)
         </td>
@@ -127,7 +143,7 @@
             @Html.DisplayFor(modelItem => item.tbl_Lookup_Qualifications.QualificationName)
         </td>
         <td>
-            @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isJobsEditor == true)))
+            @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isRegistrationEditor == true)))
             {                   <span>
                 @Html.ActionLink("Edit", "Edit", new { id = item.RegistrationID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.RegistrationID }) |

@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FatherName)
+            Father Name
         </dt>
 
         <dd>
@@ -35,15 +35,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MaritalStatusId)
+            Marital Status
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MaritalStatusId)
+            @Html.DisplayFor(model => model.tbl_Lookup_MaritalStatus.maritalstatus)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateofBirth)
+            Date of Birth
         </dt>
 
         <dd>
@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AreaOfIntrest)
+            Area Of Intrest
         </dt>
 
         <dd>
@@ -67,7 +67,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EmailAddress)
+            Email Address
         </dt>
 
         <dd>
@@ -75,7 +75,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ContactNumber)
+            Contact Number
         </dt>
 
         <dd>
@@ -83,21 +83,22 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            Address
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Address)
         </dd>
+        @if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isRegistrationEditor == true)))
+        {
+            <dt>
+                Resume File
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ResumeFilePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ResumeFilePath)
-        </dd>
-
+            <dd>
+                @Html.DisplayFor(model => model.ResumeFilePath)
+            </dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.tbl_lookup_PositionType.PositionName)
         </dt>

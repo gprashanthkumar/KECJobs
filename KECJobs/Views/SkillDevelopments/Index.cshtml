@@ -17,10 +17,12 @@
 <br />
 <br />
 
-
+@if ((KECAuthenticate.isAuthenticated == true) && ((KECAuthenticate.IsAdmin == true) || (KECAuthenticate.isSkillDevelopmentEditor == true)))
+{
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+}
 
 <p>
     @using (Html.BeginForm("Index","SkillDevelopments", FormMethod.Get))
@@ -37,10 +39,11 @@
     if (firstRec) {
     <tr>
         <th>
-            @Html.DisplayNameFor(modelItem => item.OrgName)
+            Organisation Name
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.TrainingCources)
+            Training<br/>(Area)
+
         </th>
         <th>
             @Html.DisplayNameFor(modelItem => item.Criteria)
@@ -49,16 +52,16 @@
             @Html.DisplayNameFor(modelItem => item.Locations)
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.OtherInfo)
+            Other Information
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.ContactDetails)
+            Contact Details
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.tbl_lookup_costs.CostDesc)
+            Cost<br/>(Range in Rs)
         </th>
         <th>
-            @Html.DisplayNameFor(modelItem => item.tbl_Lookup_Duration.DurationDesc)
+            Duration
         </th>
         <th></th>
     </tr>
