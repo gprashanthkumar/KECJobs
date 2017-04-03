@@ -15,7 +15,7 @@ namespace KECJobs.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "About \"" + "KEC jobs portal\"" +".";
+            ViewBag.Message = "About \"" + "KEC Jobs Portal\"" +".";
 
             return View();
         }
