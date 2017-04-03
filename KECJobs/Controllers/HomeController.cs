@@ -15,7 +15,7 @@ namespace KECJobs.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "KEC jobs portal.";
+            ViewBag.Message = "About \"" + "KEC jobs portal\"" +".";
 
             return View();
         }
@@ -24,6 +24,12 @@ namespace KECJobs.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult NotAuthorised()
+        {
+            ViewBag.Message = "You do not have authorisation to perform this action on this page.";
             return View();
         }
     }

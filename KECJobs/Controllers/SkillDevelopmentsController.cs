@@ -70,6 +70,12 @@ namespace KECJobs.Controllers
         // GET: SkillDevelopments/Create
         public ActionResult Create()
         {
+
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isSkillDevelopmentEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             ViewBag.CostId = new SelectList(db.Lookup_Costs1, "Costid", "CostDesc");
             ViewBag.DurationId = new SelectList(db.Lookup_Duration, "DurationId", "DurationDesc");
             return View();
@@ -82,6 +88,11 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SkillDevID,OrgName,TrainingCources,DurationId,CostId,Criteria,Locations,OtherInfo,ContactDetails")] SkillDevelopment skillDevelopment)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isSkillDevelopmentEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             if (ModelState.IsValid)
             {
                 db.SkillDevelopments.Add(skillDevelopment);
@@ -97,6 +108,11 @@ namespace KECJobs.Controllers
         // GET: SkillDevelopments/Edit/5
         public ActionResult Edit(int? id)
         {
+
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isSkillDevelopmentEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +134,11 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SkillDevID,OrgName,TrainingCources,DurationId,CostId,Criteria,Locations,OtherInfo,ContactDetails")] SkillDevelopment skillDevelopment)
         {
+
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isSkillDevelopmentEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(skillDevelopment).State = EntityState.Modified;
@@ -132,6 +153,11 @@ namespace KECJobs.Controllers
         // GET: SkillDevelopments/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isSkillDevelopmentEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -149,6 +175,11 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isSkillDevelopmentEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             SkillDevelopment skillDevelopment = db.SkillDevelopments.Find(id);
             db.SkillDevelopments.Remove(skillDevelopment);
             db.SaveChanges();

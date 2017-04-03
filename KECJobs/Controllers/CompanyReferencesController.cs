@@ -48,6 +48,11 @@ namespace KECJobs.Controllers
         // GET: CompanyReferences/Details/5
         public ActionResult Details(int? id)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isReferenceEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -63,6 +68,10 @@ namespace KECJobs.Controllers
         // GET: CompanyReferences/Create
         public ActionResult Create()
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isReferenceEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
             return View();
         }
 
@@ -73,6 +82,11 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ReferorID,Contact,CompanyName,MailID")] CompanyReferences companyReferences)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isReferenceEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             if (ModelState.IsValid)
             {
                 db.CompanyReferences.Add(companyReferences);
@@ -86,6 +100,10 @@ namespace KECJobs.Controllers
         // GET: CompanyReferences/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isReferenceEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,6 +123,11 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ReferorID,Contact,CompanyName,MailID")] CompanyReferences companyReferences)
         {
+
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isReferenceEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(companyReferences).State = EntityState.Modified;
@@ -117,6 +140,11 @@ namespace KECJobs.Controllers
         // GET: CompanyReferences/Delete/5
         public ActionResult Delete(int? id)
         {
+
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isReferenceEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -134,6 +162,11 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isReferenceEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             CompanyReferences companyReferences = db.CompanyReferences.Find(id);
             db.CompanyReferences.Remove(companyReferences);
             db.SaveChanges();

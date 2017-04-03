@@ -85,6 +85,7 @@ namespace KECJobs.Controllers
             return View(registration);
         }
 
+      
         // GET: Registrations/Create
         public ActionResult Register()
         {
@@ -140,6 +141,11 @@ namespace KECJobs.Controllers
         // GET: Registrations/Edit/5
         public ActionResult Edit(int? id)
         {
+           if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isRegistrationEditor==false))
+                {
+                return RedirectToAction("NotAuthorised","Home"); 
+                }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -163,6 +169,10 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "RegistrationID,Surname,Name,FatherName,MaritalStatusId,DateofBirth,Gender,QualificationID,PositiontypeID,AreaOfIntrest,EmailAddress,ContactNumber,Address,ResumeFilePath")] Registration registration)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isRegistrationEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(registration).State = EntityState.Modified;
@@ -179,6 +189,11 @@ namespace KECJobs.Controllers
         // GET: Registrations/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isRegistrationEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -196,6 +211,11 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isRegistrationEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             Registration registration = db.Registrations.Find(id);
             db.Registrations.Remove(registration);
             db.SaveChanges();

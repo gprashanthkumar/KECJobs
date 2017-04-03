@@ -108,6 +108,11 @@ namespace KECJobs.Controllers
         // GET: JobOpenings/Create
         public ActionResult Create()
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isJobsEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
             ViewBag.jobExperienceID = new SelectList(db.Lookup_Experiences, "ExperienceID", "ExperienceShort_Description");
 
             return View();
@@ -120,6 +125,12 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "JobOpenID,jobExperienceID,JobID,Company,jobPosition,Qualification,Locations,ContactDetails,ValidFrom,ValidTo,Keywords,JobFile")] JobOpenings jobOpenings)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isJobsEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
+
             var strAppPath = System.Web.HttpRuntime.AppDomainAppVirtualPath.ToString();
             if (strAppPath == "/")
             {
@@ -173,6 +184,12 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "JobOpenID,jobExperienceID,JobID,Company,jobPosition,Qualification,Locations,ContactDetails,ValidFrom,ValidTo,Keywords")] JobOpenings jobOpenings)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isJobsEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
+
             if (ModelState.IsValid)
             {
                 db.Entry(jobOpenings).State = EntityState.Modified;
@@ -186,6 +203,12 @@ namespace KECJobs.Controllers
         // GET: JobOpenings/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isJobsEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -203,6 +226,12 @@ namespace KECJobs.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!(KECAuthenticate.isAuthenticated) || (KECAuthenticate.IsAdmin == false) && (KECAuthenticate.isJobsEditor == false))
+            {
+                return RedirectToAction("NotAuthorised", "Home");
+            }
+
+
             JobOpenings jobOpenings = db.JobOpenings.Find(id);
             db.JobOpenings.Remove(jobOpenings);
             db.SaveChanges();
