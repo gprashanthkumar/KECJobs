@@ -23,7 +23,9 @@
     @Html.ActionLink("Register a new member for Event", "Register")
 </p>
 }
-
+<div align="right">
+    <p>@Html.ActionLink("Download Excel", "PrintExcel", "Registrations", null, new { @class = "btn btn-primary btn-lg", @target = "_new" })</p>
+</div>
 <p>
     @using (Html.BeginForm("Index", "Registrations", FormMethod.Get))
     {

@@ -251,5 +251,52 @@ namespace KECJobs.Controllers
         {
             return View();
         }
+
+        public void PrintExcel(int grad = 0)
+        {
+            List<ExcelJobOpenings> x = new List<ExcelJobOpenings>();
+            if (grad == 1)
+            {
+                x = (from n in db.JobOpenings.AsEnumerable() where n.tbl_Lookup_Experiences.GraduateGroup == true orderby n.JobOpenID select
+                    new ExcelJobOpenings {
+                        JobOpenID = n.JobOpenID,
+                        jobExperience = n.tbl_Lookup_Experiences.ExperienceShort_Description,
+                        JobID = n.JobID,
+                        Company = n.Company,
+                        jobPosition = n.jobPosition,
+                        Qualification = n.Qualification,
+                        Locations = n.Locations,
+                        ContactDetails = n.ContactDetails,
+                        ValidFrom = n.ValidFrom.Value.ToShortDateString(),
+                        ValidTo= n.ValidTo.Value.ToShortDateString(),
+                        Keywords=n.Keywords,
+                        JobFile=n.JobFile
+                     }
+                     ).ToList();
+            }
+
+            else {
+                x = (from n in db.JobOpenings.AsEnumerable() where n.tbl_Lookup_Experiences.ExperienceGroup == true orderby n.JobOpenID select
+                     new ExcelJobOpenings
+                     {
+                         JobOpenID = n.JobOpenID,
+                         jobExperience = n.tbl_Lookup_Experiences.ExperienceShort_Description,
+                         JobID = n.JobID,
+                         Company = n.Company,
+                         jobPosition = n.jobPosition,
+                         Qualification = n.Qualification,
+                         Locations = n.Locations,
+                         ContactDetails = n.ContactDetails,
+                         ValidFrom = n.ValidFrom.Value.ToShortDateString(),
+                         ValidTo = n.ValidTo.Value.ToShortDateString(),
+                         Keywords = n.Keywords,
+                         JobFile = n.JobFile
+                     }
+                     ).ToList(); 
+            }
+            
+            var dt = KECJobs.Constants.ToDataTable(x);
+            Constants.ExporttoExcel(dt);
+        }
     }
 }

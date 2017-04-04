@@ -198,5 +198,25 @@ namespace KECJobs.Controllers
         {
             return View();
         }
+        public void PrintExcel()
+        {
+            List<ExcelSkillDevelopment> x = new List<ExcelSkillDevelopment>();
+            x = (from n in db.SkillDevelopments.AsEnumerable() orderby n.SkillDevID
+                 select new ExcelSkillDevelopment {
+                     SkillDevID= n.SkillDevID.ToString(),
+                     OrgName = n.OrgName,
+                     TrainingCources= n.TrainingCources,
+                     Duration =n.tbl_Lookup_Duration.DurationDesc,
+                     Cost=n.tbl_lookup_costs.CostDesc,
+                     Criteria = n.Criteria,
+                     Locations=n.Locations,
+                     OtherInfo=n.OtherInfo,
+                     ContactDetails=n.ContactDetails                
+
+                 }
+                 ).ToList();
+            var dt = KECJobs.Constants.ToDataTable(x);
+            Constants.ExporttoExcel(dt);
+        }
     }
 }

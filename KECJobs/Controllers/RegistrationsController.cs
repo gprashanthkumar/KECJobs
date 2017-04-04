@@ -230,6 +230,40 @@ namespace KECJobs.Controllers
             }
             base.Dispose(disposing);
         }
+        public void PrintExcel()
+        {
+            List<ExcelEventRegistration> x = new List<ExcelEventRegistration>();
+            try
+            {
+ x = (from n in db.Registrations.AsEnumerable() orderby n.RegistrationID
 
+                 select new ExcelEventRegistration {
+                     RegistrationID = n.RegistrationID,
+                     Surname = n.Surname,
+                     Name = n.Name,
+                     FatherName = n.FatherName,
+                     MaritalStatus = n.tbl_Lookup_MaritalStatus.maritalstatus,
+                     DateofBirth = n.DateofBirth.Value.ToShortDateString(),
+                     Gender= n.Gender,
+                     Qualification=n.tbl_Lookup_Qualifications.QualificationName,
+                     Positiontype=n.tbl_lookup_PositionType.PositionDescription,
+                     AreaOfIntrest=n.AreaOfIntrest,
+                     EmailAddress=n.EmailAddress,
+                     ContactNumber=n.ContactNumber,
+                     Address=n.Address,
+                     ResumeFile= (n.ResumeFilePath == null ? "Not Submitted" : "Submitted")
+
+                 }).ToList();
+            var dt = KECJobs.Constants.ToDataTable(x);
+                Constants.ExporttoExcel(dt);
+            }
+            finally
+            {
+                x = null;
+            }
+           
+          
+            
+        }
     }
 }

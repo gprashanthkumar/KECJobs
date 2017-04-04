@@ -23,7 +23,9 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 }
-
+<div align="right">
+    <p>@Html.ActionLink("Download Excel", "PrintExcel", "SkillDevelopments", null, new { @class = "btn btn-primary btn-lg", @target = "_new" })</p>
+</div>
 <p>
     @using (Html.BeginForm("Index","SkillDevelopments", FormMethod.Get))
     {

@@ -10,6 +10,7 @@ using KECJobs.Models;
 using PagedList;
 using System.Configuration;
 
+
 namespace KECJobs.Controllers
 {
     public class CompanyReferencesController : Controller
@@ -42,6 +43,7 @@ namespace KECJobs.Controllers
                    || (n.MailID.Contains(Search))
                    )).OrderBy(m => m.ReferorID).ToPagedList(PageNumber, PageSize)); 
             }
+
             return View(References.OrderBy(m => m.ReferorID).ToPagedList(PageNumber, PageSize));
         }
 
@@ -185,5 +187,15 @@ namespace KECJobs.Controllers
         {
             return View();
         }
-    }
+
+        public void PrintExcel()
+        {
+            List<CompanyReferences> x = new List<CompanyReferences>();
+           x  = (from n in db.CompanyReferences.AsEnumerable() orderby n.ReferorID select n).ToList();
+            var dt = KECJobs.Constants.ToDataTable(x);
+            Constants.ExporttoExcel(dt);
+        }
+
+
+        }
 }

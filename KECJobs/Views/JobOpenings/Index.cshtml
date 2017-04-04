@@ -27,6 +27,9 @@
         @Html.ActionLink("Create New", "Create")
     </p>
 }
+<div align="right">
+    <p>@Html.ActionLink("Download Excel", "PrintExcel", "JobOpenings", new { grad = ViewBag.grad } , new { @class = "btn btn-primary btn-lg", @target = "_new" })</p>
+</div>
     <p>
         @using (Html.BeginForm("Index","JobOpenings",FormMethod.Get))
         {
